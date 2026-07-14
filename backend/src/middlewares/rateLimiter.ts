@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import rateLimit from "../config/upstash";
 
-const rateLimiter = async (req: Request, res: Response, next: NextFunction) => {
+const rateLimiter = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const { success } = await rateLimit.limit("my-rate-limit");
 
