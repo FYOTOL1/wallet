@@ -2,7 +2,7 @@
   "compilerOptions": {
     /* File Layout */
     "rootDir": "./src",
-    "outDir": "./dir",
+    "outDir": "./dist",
 
     /* Environment */
     "target": "ES2020",
