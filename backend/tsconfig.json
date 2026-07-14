@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     /* File Layout */
-    "rootDir": "src",
-    "outDir": "dist",
+    "rootDir": "./src",
+    "outDir": "./dir",
 
     /* Environment */
     "target": "ES2020",
