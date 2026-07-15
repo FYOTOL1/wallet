@@ -1,7 +1,6 @@
+import { API_URL } from "@/constants/api";
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
-
-const API_URL = process.env.EXPO_PUBLIC_API_URL || "http://localhost:5001/api";
 
 export type TSummary = {
   income: string;
