@@ -38,7 +38,7 @@ export default function Page() {
 
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
-        router.replace("/(root)/index");
+        router.replace("/(root)");
       } else if (signInAttempt.status === "needs_second_factor") {
         await signIn.prepareSecondFactor({ strategy: "email_code" });
         setNeedsSecondFactor(true);
@@ -70,7 +70,7 @@ export default function Page() {
 
       if (attempt.status === "complete") {
         await setActive({ session: attempt.createdSessionId });
-        router.replace("/(root)/index");
+        router.replace("/(root)");
       } else {
         console.error("Sign-in attempt not complete:", attempt);
       }

@@ -3,19 +3,26 @@ import { Alert } from "react-native";
 
 const API_URL = "http://localhost:5001/api";
 
+export type TSummary = {
+  income: string;
+  balance: string;
+  expenses: string;
+};
+
 export const useTransactions = (userId: string) => {
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [summary, setSummary] = useState({
-    balance: 0,
-    income: 0,
-    expenses: 0,
+  const [summary, setSummary] = useState<TSummary>({
+    balance: "0",
+    income: "0",
+    expenses: "0",
   });
 
   const fetchTransactions = useCallback(async () => {
     try {
       const res = await fetch(`${API_URL}/transactions/${userId}`);
       const data = await res.json();
+
       setTransactions(data);
     } catch (error) {
       console.log("Failed Fetch Transactions! ", error);
@@ -26,7 +33,7 @@ export const useTransactions = (userId: string) => {
     try {
       const res = await fetch(`${API_URL}/transactions/summary/${userId}`);
       const data = await res.json();
-      setTransactions(data);
+      setSummary(data);
     } catch (error) {
       console.log("Failed Fetch Summary! ", error);
     }
@@ -37,7 +44,7 @@ export const useTransactions = (userId: string) => {
     setIsLoading(true);
 
     try {
-      await Promise.all([fetchTransactions(), fetchSummary()]);
+      await Promise.allSettled([fetchTransactions(), fetchSummary()]);
     } catch (error) {
       console.log("Error Loading Data! ", error);
     } finally {
@@ -45,7 +52,7 @@ export const useTransactions = (userId: string) => {
     }
   }, [fetchSummary, fetchTransactions, userId]);
 
-  const deleteTransaction = async (id: string) => {
+  const deleteTransaction = async (id: number) => {
     try {
       const res = await fetch(`${API_URL}/transactions/${id}`, {
         method: "DELETE",
@@ -56,7 +63,7 @@ export const useTransactions = (userId: string) => {
       Alert.alert("Success", "Transaction Deleted Successfully");
     } catch (error) {
       console.log("Failed deleting transaction! ", error);
-      Alert.alert("Error", error.message);
+      Alert.alert("Error", error as string);
     }
   };
 

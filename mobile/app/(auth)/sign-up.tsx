@@ -64,7 +64,7 @@ export default function Page() {
 
       if (signUpAttempt.status === "complete") {
         await setActive({ session: signUpAttempt.createdSessionId });
-        router.replace("/(root)/index");
+        router.replace("/(root)");
       } else {
         // Check why the sign-up is not complete
         console.error("Sign-up attempt not complete:", signUpAttempt);
