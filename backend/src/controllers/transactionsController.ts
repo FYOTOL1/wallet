@@ -67,7 +67,6 @@ async function deleteTransaction(req: Request, res: Response) {
 async function getSummaryById(req: Request, res: Response) {
   try {
     const { userId } = req.params;
-    console.log(userId);
 
     const balanceResult = await sql`
         SELECT COALESCE(SUM(amount), 0) as balance FROM transactions WHERE user_id = ${userId}
